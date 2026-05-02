@@ -3,215 +3,75 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Side Story — Colt Damian</title>
+<title>Something Untitled — Colt Damian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #f5f2ed;
-    --surface: #faf8f5;
-    --ink: #1e1b18;
-    --muted: #7a7068;
-    --faint: #b0a89e;
-    --accent: #c06b3a;
-    --border: #e2dcd4;
+    --bg: #f5f2ed; --surface: #faf8f5; --ink: #1e1b18;
+    --muted: #7a7068; --faint: #b0a89e; --accent: #c06b3a; --border: #e2dcd4;
   }
-
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Nunito', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3.5rem 1.25rem 6rem;
+    background: var(--bg); color: var(--ink);
+    font-family: 'Nunito', sans-serif; font-weight: 300;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 3.5rem 1.25rem 6rem;
   }
-
   .byline {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--faint);
-    margin-bottom: 3rem;
-    text-align: center;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 3rem; text-align: center;
   }
   .byline a { color: var(--accent); text-decoration: none; }
-  .byline a:hover { text-decoration: underline; }
-
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 3rem 2.75rem;
-    width: 100%;
-    max-width: 660px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 3rem 2.75rem; width: 100%; max-width: 660px;
     box-shadow: 0 2px 24px rgba(0,0,0,0.045);
   }
-
   .story-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
   }
   h1 {
-    font-family: 'Lora', serif;
-    font-size: 1.85rem;
-    font-weight: 500;
-    line-height: 1.25;
-    color: var(--ink);
-    margin-bottom: 0.4rem;
+    font-family: 'Lora', serif; font-size: 1.85rem; font-weight: 500;
+    line-height: 1.25; color: var(--ink); margin-bottom: 0.4rem;
   }
   .story-meta {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-bottom: 2.25rem;
-    padding-bottom: 1.75rem;
-    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--muted); margin-bottom: 2rem;
+    padding-bottom: 1.75rem; border-bottom: 1px solid var(--border);
   }
-
   .story-text {
-    font-family: 'Lora', serif;
-    font-size: 1.05rem;
-    line-height: 1.95;
-    color: var(--ink);
+    font-family: 'Lora', serif; font-size: 1.05rem;
+    line-height: 1.95; color: var(--ink); margin-bottom: 2rem;
   }
-  .story-text p { margin-bottom: 1.3em; }
-  .story-text p:last-child { margin-bottom: 0; }
-
-  .note {
-    background: #fdf6ee;
-    border-left: 2px solid var(--accent);
-    border-radius: 0 6px 6px 0;
-    padding: 0.9rem 1.1rem;
-    margin: 2rem 0;
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.7;
+  .chapters-label {
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 0.85rem;
   }
-  .note strong { color: var(--ink); font-weight: 500; }
-  .note-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.35rem;
+  .chapter-list { display: flex; flex-direction: column; gap: 8px; }
+  .chapter-link {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.9rem 1.1rem; border: 1px solid var(--border);
+    border-radius: 8px; text-decoration: none; color: var(--ink);
+    font-family: 'Lora', serif; font-size: 0.95rem;
+    background: transparent; transition: background 0.15s;
   }
-
-  .break {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 2.25rem 0;
-    color: var(--faint);
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+  .chapter-link:hover { background: #f0ece4; }
+  .chapter-link .ch-title { display: flex; flex-direction: column; gap: 3px; }
+  .chapter-link .ch-name { font-size: 0.95rem; }
+  .chapter-link .ch-sub { font-size: 0.72rem; color: var(--muted); font-family: 'Nunito', sans-serif; font-style: normal; }
+  .ch-badge {
+    font-size: 0.7rem; font-family: 'Nunito', sans-serif;
+    padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+    flex-shrink: 0;
   }
-  .break::before, .break::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .gate-box {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 2rem 1.75rem;
-    text-align: center;
-  }
-  .gate-icon { font-size: 1.3rem; margin-bottom: 0.6rem; display: block; }
-  .gate-title {
-    font-family: 'Lora', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--ink);
-    margin-bottom: 0.3rem;
-  }
-  .gate-sub {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 1.4rem;
-    line-height: 1.6;
-  }
-  .gate-row { display: flex; justify-content: center; gap: 8px; }
-  .gate-input {
-    padding: 9px 14px;
-    font-size: 0.85rem;
-    font-family: 'Nunito', sans-serif;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--bg);
-    letter-spacing: 0.15em;
-    text-align: center;
-    width: 155px;
-    outline: none;
-    color: var(--ink);
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .gate-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(192,107,58,0.12);
-  }
-  .gate-btn {
-    padding: 9px 20px;
-    font-size: 0.82rem;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 500;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
-  .gate-btn:hover { opacity: 0.82; }
-  .gate-error {
-    color: #b03030;
-    font-size: 0.76rem;
-    font-style: italic;
-    margin-top: 0.65rem;
-    min-height: 1.1em;
-  }
-  .gate-hint { font-size: 0.72rem; color: var(--faint); margin-top: 0.45rem; }
-
-  .gate-content { display: none; margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--border); }
-  .gate-content.open { display: block; }
-  .unlocked-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #3a7a4a;
-    background: #edf5ef;
-    border-radius: 20px;
-    padding: 3px 10px;
-    margin-bottom: 1.25rem;
-  }
-
+  .ch-badge.free { background: #edf5ef; color: #3a7a4a; }
+  .ch-badge.locked { background: #fdf6ee; color: #8a5a20; }
   .footer {
-    margin-top: 2.5rem;
-    font-size: 0.72rem;
-    color: var(--faint);
-    text-align: center;
-    letter-spacing: 0.05em;
+    margin-top: 2.5rem; font-size: 0.72rem; color: var(--faint);
+    text-align: center; letter-spacing: 0.05em;
   }
-  .footer a { color: var(--muted); text-decoration: none; }
-  .footer a:hover { color: var(--accent); }
-
-  @media (max-width: 500px) {
-    .card { padding: 2rem 1.5rem; }
-    h1 { font-size: 1.5rem; }
-  }
+  @media (max-width: 500px) { .card { padding: 2rem 1.5rem; } h1 { font-size: 1.5rem; } }
 </style>
 </head>
 <body>
@@ -221,71 +81,42 @@
 <div class="card">
 
   <p class="story-label">Side Story</p>
-  <h1>Side Story</h1>
-  <p class="story-meta">Chapter 1 &nbsp;·&nbsp; Mature content &nbsp;·&nbsp; In progress</p>
+  <h1>Something Untitled</h1>
+  <p class="story-meta">by Colt Damian &nbsp;·&nbsp; Mature content &nbsp;·&nbsp; In progress</p>
 
-  <!-- FREE STORY TEXT — edit here -->
   <div class="story-text">
-    <p>I'm Colt Damian from AO3, pleasure to meet you here.</p>
+    <p>Welcome. This is a side story set in the same world as the main fic. You don't need to have read anything else to follow along — but it helps.</p>
+    <p>New chapters are posted whenever they're ready. Each locked section has its own passcode shared in the author's note of that chapter.</p>
   </div>
 
-  <!-- AUTHOR NOTE -->
-  <div class="note">
-    <p class="note-label">Author's note</p>
-    <p>Hi, thanks for reading! The section below is age-restricted. Enjoy. ♥</p>
-  </div>
+  <p class="chapters-label">Chapters</p>
+  <div class="chapter-list">
 
-  <div class="break">restricted below</div>
+    <!-- Chapter 1 — free to read -->
+    <a class="chapter-link" href="chapter-1.html">
+      <div class="ch-title">
+        <span class="ch-name">Chapter 1 — Arrival</span>
+        <span class="ch-sub">No passcode needed</span>
+      </div>
+      <span class="ch-badge free">free</span>
+    </a>
 
-  <!-- GATE -->
-  <div class="gate-box" id="gate-box">
-    <span class="gate-icon">🔒</span>
-    <p class="gate-title">Age-restricted content</p>
-    <p class="gate-sub">Enter the passcode from the author's note above.</p>
-    <div class="gate-row">
-      <input class="gate-input" id="gate-input" type="password" placeholder="passcode" autocomplete="off" />
-      <button class="gate-btn" id="gate-btn" type="button">Unlock</button>
-    </div>
-    <p class="gate-error" id="gate-error"></p>
-    <p class="gate-hint">case-sensitive &nbsp;·&nbsp; hint: check the note above</p>
-  </div>
+    <!-- Chapter 2 — locked -->
+    <a class="chapter-link" href="chapter-2.html">
+      <div class="ch-title">
+        <span class="ch-name">Chapter 2 — The Room</span>
+        <span class="ch-sub">Passcode in author's note</span>
+      </div>
+      <span class="ch-badge locked">🔒 locked</span>
+    </a>
 
-  <!-- LOCKED CONTENT — edit here -->
-  <div class="gate-content" id="gate-content">
-    <span class="unlocked-badge">✓ unlocked</span>
-    <div class="story-text">
-      <p>Hello everyone my name is Lulu, this is the page I'm testing today.</p>
-      <p>Did it really work?</p>
-      <!-- ✏️ ADD YOUR LOCKED STORY CONTENT HERE -->
-    </div>
+    <!-- Add more chapters below by copying the block above -->
+
   </div>
 
 </div>
 
-<p class="footer">
-  <a href="#">← back</a> &nbsp;·&nbsp; posted with love
-</p>
+<p class="footer">posted with love</p>
 
-<script>
-(function() {
-  var PASSCODE = "0304"; /* ← PASSCODE */
-  function check() {
-    var input = document.getElementById("gate-input");
-    var error = document.getElementById("gate-error");
-    if (input.value.trim() === PASSCODE) {
-      document.getElementById("gate-box").style.display = "none";
-      document.getElementById("gate-content").classList.add("open");
-    } else {
-      error.textContent = "Wrong passcode — try again.";
-      input.value = "";
-      setTimeout(function() { error.textContent = ""; }, 2500);
-    }
-  }
-  document.getElementById("gate-btn").addEventListener("click", check);
-  document.getElementById("gate-input").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") check();
-  });
-})();
-</script>
 </body>
 </html>
