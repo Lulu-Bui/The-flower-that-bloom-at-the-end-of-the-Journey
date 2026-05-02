@@ -3,676 +3,272 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Colt Damian — Works</title>
+<title>Side Story — Colt Damian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --cream: #f9f6f0;
-    --paper: #fdfbf7;
-    --ink: #1a1614;
-    --ink-muted: #5a5450;
-    --ink-faint: #9a918a;
-    --accent: #8b2635;
-    --accent-light: #f3e8ea;
-    --accent-muted: #c4667a;
-    --border: #e0d8ce;
-    --border-strong: #c8bdb0;
-    --tag-bg: #f0ece4;
-    --tag-color: #6b5e52;
-    --warn-bg: #fff8e6;
-    --warn-border: #e8c84a;
-    --warn-text: #7a5a00;
-    --success: #2a6a3a;
-    --success-bg: #edf5ef;
+    --bg: #f5f2ed;
+    --surface: #faf8f5;
+    --ink: #1e1b18;
+    --muted: #7a7068;
+    --faint: #b0a89e;
+    --accent: #c06b3a;
+    --border: #e2dcd4;
   }
 
-  html { font-size: 16px; }
   body {
-    background: var(--cream);
+    background: var(--bg);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    line-height: 1.6;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
     min-height: 100vh;
-  }
-
-  /* ── TOP NAV ── */
-  .site-header {
-    background: var(--accent);
-    color: #fff;
-    padding: 0 2rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    height: 52px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    padding: 3.5rem 1.25rem 6rem;
   }
-  .site-logo {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    color: #fff;
-    text-decoration: none;
-  }
-  .site-logo span { font-style: italic; opacity: 0.8; font-size: 0.9em; }
-  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-  .nav-links a {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    font-size: 0.82rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
+
+  .byline {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    transition: color 0.15s;
+    color: var(--faint);
+    margin-bottom: 3rem;
+    text-align: center;
   }
-  .nav-links a:hover { color: #fff; }
+  .byline a { color: var(--accent); text-decoration: none; }
+  .byline a:hover { text-decoration: underline; }
 
-  /* ── LAYOUT ── */
-  .page-wrap {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem 5rem;
-    display: grid;
-    grid-template-columns: 1fr 260px;
-    gap: 2.5rem;
-    align-items: start;
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem 2.75rem;
+    width: 100%;
+    max-width: 660px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.045);
   }
 
-  /* ── STORY HEADER ── */
-  .story-header { margin-bottom: 1.75rem; }
-  .story-fandom {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.4rem;
-  }
-  .story-title {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-  }
-  .story-author {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.05rem;
-    color: var(--ink-muted);
-    font-style: italic;
-  }
-  .story-author a { color: var(--accent); text-decoration: none; }
-  .story-author a:hover { text-decoration: underline; }
-
-  /* ── META STRIP ── */
-  .meta-strip {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 1.5rem;
-    font-size: 0.8rem;
-    color: var(--ink-muted);
-  }
-  .meta-item { display: flex; flex-direction: column; gap: 2px; }
-  .meta-label {
+  .story-label {
     font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-  .meta-value { color: var(--ink); font-weight: 400; }
-  .meta-value.rating-m {
-    background: var(--accent);
-    color: #fff;
-    padding: 1px 7px;
-    border-radius: 3px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    display: inline-block;
-    margin-top: 2px;
-  }
-
-  /* ── TAGS ── */
-  .tag-section { margin-bottom: 1.5rem; }
-  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.5rem; }
-  .tag-row-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 0.4rem;
-  }
-  .tag {
-    background: var(--tag-bg);
-    color: var(--tag-color);
-    border: 1px solid var(--border);
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .tag:hover { background: var(--border); }
-  .tag.warning-tag {
-    background: var(--warn-bg);
-    border-color: var(--warn-border);
-    color: var(--warn-text);
-  }
-  .tag.ship-tag { background: var(--accent-light); border-color: var(--accent-muted); color: var(--accent); }
-
-  /* ── SUMMARY ── */
-  .summary-box {
-    background: var(--paper);
-    border-left: 3px solid var(--accent);
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.75rem;
-    border-radius: 0 6px 6px 0;
-  }
-  .summary-box-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 0.5rem;
   }
-  .summary-box p {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--ink-muted);
-    font-style: italic;
-  }
-
-  /* ── CHAPTER NAV ── */
-  .chapter-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    margin-bottom: 1.75rem;
-  }
-  .chapter-nav-label {
-    font-size: 0.8rem;
-    color: var(--ink-muted);
+  h1 {
+    font-family: 'Lora', serif;
+    font-size: 1.85rem;
     font-weight: 500;
-  }
-  .chapter-select {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    border: 1px solid var(--border-strong);
-    background: #fff;
+    line-height: 1.25;
     color: var(--ink);
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .chapter-arrows { display: flex; gap: 6px; }
-  .ch-arrow {
-    background: none;
-    border: 1px solid var(--border-strong);
-    color: var(--ink-muted);
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.12s;
-  }
-  .ch-arrow:hover { background: var(--tag-bg); }
-
-  /* ── AUTHOR'S NOTE ── */
-  .authors-note {
-    background: #fffdf5;
-    border: 1px solid #e8d8a0;
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.75rem;
-  }
-  .authors-note-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #7a6a20;
-    margin-bottom: 0.5rem;
-  }
-  .authors-note p {
-    font-family: 'EB Garamond', serif;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--ink-muted);
-  }
-  .authors-note p strong { font-weight: 700; color: var(--ink); }
-
-  /* ── STORY BODY ── */
-  .story-body {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.12rem;
-    line-height: 1.9;
-    color: var(--ink);
-    margin-bottom: 2rem;
-  }
-  .story-body p { margin-bottom: 1.2em; }
-  .story-body p:last-child { margin-bottom: 0; }
-  .story-body em { font-style: italic; }
-  .story-body strong { font-weight: 700; }
-
-  /* ── DIVIDER ── */
-  .scene-break {
-    text-align: center;
-    color: var(--ink-faint);
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    border-top: 1px solid var(--border);
-    padding-top: 1.25rem;
-    margin: 2rem 0 1.5rem;
-  }
-
-  /* ── PASSCODE GATE ── */
-  .gate-wrap { margin: 1.5rem 0; }
-  .gate-box {
-    border: 1px solid var(--border-strong);
-    border-radius: 8px;
-    padding: 1.75rem 1.5rem;
-    background: var(--paper);
-    text-align: center;
-  }
-  .gate-lock {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
     margin-bottom: 0.4rem;
   }
-  .gate-lock::before { content: "🔒 "; font-size: 0.85rem; }
+  .story-meta {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 2.25rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .story-text {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    line-height: 1.95;
+    color: var(--ink);
+  }
+  .story-text p { margin-bottom: 1.3em; }
+  .story-text p:last-child { margin-bottom: 0; }
+
+  .note {
+    background: #fdf6ee;
+    border-left: 2px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+    margin: 2rem 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .note strong { color: var(--ink); font-weight: 500; }
+  .note-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+
+  .break {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.25rem 0;
+    color: var(--faint);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .break::before, .break::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .gate-box {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 1.75rem;
+    text-align: center;
+  }
+  .gate-icon { font-size: 1.3rem; margin-bottom: 0.6rem; display: block; }
   .gate-title {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Lora', serif;
     font-size: 1rem;
     font-style: italic;
-    margin-bottom: 0.3rem;
     color: var(--ink);
+    margin-bottom: 0.3rem;
   }
   .gate-sub {
-    font-size: 0.82rem;
-    color: var(--ink-muted);
-    margin-bottom: 1.2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
     line-height: 1.6;
   }
   .gate-row { display: flex; justify-content: center; gap: 8px; }
   .gate-input {
-    padding: 8px 14px;
-    font-size: 0.88rem;
-    font-family: 'DM Sans', sans-serif;
-    border: 1px solid var(--border-strong);
-    border-radius: 5px;
-    background: #fff;
+    padding: 9px 14px;
+    font-size: 0.85rem;
+    font-family: 'Nunito', sans-serif;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
     letter-spacing: 0.15em;
     text-align: center;
-    width: 160px;
+    width: 155px;
     outline: none;
     color: var(--ink);
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .gate-input:focus {
-    border-color: var(--accent-muted);
-    box-shadow: 0 0 0 3px rgba(139,38,53,0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(192,107,58,0.12);
   }
   .gate-btn {
-    padding: 8px 18px;
+    padding: 9px 20px;
     font-size: 0.82rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 500;
     background: var(--accent);
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    letter-spacing: 0.04em;
     transition: opacity 0.15s;
   }
   .gate-btn:hover { opacity: 0.82; }
   .gate-error {
-    color: var(--accent);
-    font-size: 0.78rem;
+    color: #b03030;
+    font-size: 0.76rem;
     font-style: italic;
-    margin-top: 0.7rem;
-    min-height: 1.2em;
-    font-family: 'DM Sans', sans-serif;
+    margin-top: 0.65rem;
+    min-height: 1.1em;
   }
-  .gate-hint { font-size: 0.74rem; color: var(--ink-faint); margin-top: 0.5rem; }
-  .gate-content { display: none; margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1.75rem; }
-  .gate-content.open { display: block; }
-  .gate-granted {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--success);
-    background: var(--success-bg);
-    border-radius: 4px;
-    padding: 4px 10px;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
+  .gate-hint { font-size: 0.72rem; color: var(--faint); margin-top: 0.45rem; }
 
-  /* ── SIDEBAR ── */
-  .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
-  .sidebar-card {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.1rem 1.25rem;
-  }
-  .sidebar-card-title {
-    font-size: 0.72rem;
-    font-weight: 500;
+  .gate-content { display: none; margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--border); }
+  .gate-content.open { display: block; }
+  .unlocked-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 0.85rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--border);
+    color: #3a7a4a;
+    background: #edf5ef;
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-bottom: 1.25rem;
   }
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-  .stat-item { display: flex; flex-direction: column; gap: 2px; }
-  .stat-label { font-size: 0.68rem; color: var(--ink-faint); letter-spacing: 0.06em; text-transform: uppercase; }
-  .stat-value { font-size: 1.05rem; font-weight: 500; color: var(--ink); font-family: 'EB Garamond', serif; }
-  .rating-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
+
+  .footer {
+    margin-top: 2.5rem;
     font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 3px;
-  }
-
-  .bookmark-btn {
-    display: block;
-    width: 100%;
-    background: none;
-    border: 1px solid var(--border-strong);
-    border-radius: 5px;
-    padding: 8px;
-    font-size: 0.82rem;
-    color: var(--ink-muted);
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: background 0.12s;
-    margin-bottom: 8px;
-  }
-  .bookmark-btn:hover { background: var(--tag-bg); color: var(--ink); }
-  .bookmark-btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    font-weight: 500;
-  }
-  .bookmark-btn.primary:hover { opacity: 0.85; }
-
-  .kudos-count {
-    font-family: 'EB Garamond', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--accent);
+    color: var(--faint);
     text-align: center;
-    display: block;
-    margin-bottom: 0.2rem;
+    letter-spacing: 0.05em;
   }
-  .kudos-label { text-align: center; font-size: 0.75rem; color: var(--ink-faint); letter-spacing: 0.05em; text-transform: uppercase; }
+  .footer a { color: var(--muted); text-decoration: none; }
+  .footer a:hover { color: var(--accent); }
 
-  .comment-stub {
-    display: flex;
-    gap: 10px;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.82rem;
-  }
-  .comment-stub:last-child { border-bottom: none; }
-  .comment-avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--accent-light);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--accent);
-  }
-  .comment-user { font-weight: 500; color: var(--ink); font-size: 0.78rem; }
-  .comment-text { color: var(--ink-muted); font-size: 0.78rem; line-height: 1.5; margin-top: 1px; font-family: 'EB Garamond', serif; font-style: italic; }
-
-  /* ── FOOTER ── */
-  .site-footer {
-    background: #2a1f1a;
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    margin-top: 3rem;
-  }
-  .site-footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
-
-  @media (max-width: 680px) {
-    .page-wrap { grid-template-columns: 1fr; }
-    .sidebar { order: -1; }
-    .story-title { font-size: 1.5rem; }
+  @media (max-width: 500px) {
+    .card { padding: 2rem 1.5rem; }
+    h1 { font-size: 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <a class="site-logo" href="#">Colt Damian <span>— Works</span></a>
-  <nav class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">Archive</a>
-    <a href="#">Series</a>
-    <a href="#">About</a>
-  </nav>
-</header>
+<p class="byline">A side story by <a href="#">Colt Damian</a> &nbsp;·&nbsp; for the readers</p>
 
-<div class="page-wrap">
+<div class="card">
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <div class="story-header">
-      <p class="story-fandom">Original Work · Contemporary Fiction</p>
-      <h1 class="story-title">Something Untitled</h1>
-      <p class="story-author">by <a href="#">Colt Damian</a></p>
+  <p class="story-label">Side Story</p>
+  <h1>Side Story</h1>
+  <p class="story-meta">Chapter 1 &nbsp;·&nbsp; Mature content &nbsp;·&nbsp; In progress</p>
+
+  <!-- FREE STORY TEXT — edit here -->
+  <div class="story-text">
+    <p>I'm Colt Damian from AO3, pleasure to meet you here.</p>
+  </div>
+
+  <!-- AUTHOR NOTE -->
+  <div class="note">
+    <p class="note-label">Author's note</p>
+    <p>Hi, thanks for reading! The section below is age-restricted. Enjoy. ♥</p>
+  </div>
+
+  <div class="break">restricted below</div>
+
+  <!-- GATE -->
+  <div class="gate-box" id="gate-box">
+    <span class="gate-icon">🔒</span>
+    <p class="gate-title">Age-restricted content</p>
+    <p class="gate-sub">Enter the passcode from the author's note above.</p>
+    <div class="gate-row">
+      <input class="gate-input" id="gate-input" type="password" placeholder="passcode" autocomplete="off" />
+      <button class="gate-btn" id="gate-btn" type="button">Unlock</button>
     </div>
+    <p class="gate-error" id="gate-error"></p>
+    <p class="gate-hint">case-sensitive &nbsp;·&nbsp; hint: check the note above</p>
+  </div>
 
-    <!-- META -->
-    <div class="meta-strip">
-      <div class="meta-item">
-        <span class="meta-label">Rating</span>
-        <span class="meta-value rating-m">Mature</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Chapters</span>
-        <span class="meta-value">1 / ?</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Words</span>
-        <span class="meta-value">—</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Status</span>
-        <span class="meta-value">In Progress</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Published</span>
-        <span class="meta-value">2025</span>
-      </div>
+  <!-- LOCKED CONTENT — edit here -->
+  <div class="gate-content" id="gate-content">
+    <span class="unlocked-badge">✓ unlocked</span>
+    <div class="story-text">
+      <p>Hello everyone my name is Lulu, this is the page I'm testing today.</p>
+      <p>Did it really work?</p>
+      <!-- ✏️ ADD YOUR LOCKED STORY CONTENT HERE -->
     </div>
+  </div>
 
-    <!-- TAGS -->
-    <div class="tag-section">
-      <div class="tag-row-label">Warnings &amp; Tags</div>
-      <div class="tag-row">
-        <span class="tag warning-tag">Age-Restricted Content</span>
-        <span class="tag ship-tag">Original Characters</span>
-        <span class="tag">Slow Burn</span>
-        <span class="tag">Angst</span>
-        <span class="tag">Found Family</span>
-        <span class="tag">Hurt/Comfort</span>
-      </div>
-    </div>
-
-    <!-- SUMMARY -->
-    <div class="summary-box">
-      <p class="summary-box-label">Summary</p>
-      <p>A story that begins somewhere quiet and ends somewhere you didn't expect. The details will find you.</p>
-    </div>
-
-    <!-- CHAPTER NAV -->
-    <div class="chapter-nav">
-      <span class="chapter-nav-label">Chapter 1</span>
-      <select class="chapter-select">
-        <option>Chapter 1: Arrival</option>
-      </select>
-      <div class="chapter-arrows">
-        <button class="ch-arrow" title="Previous">&#8592;</button>
-        <button class="ch-arrow" title="Next">&#8594;</button>
-      </div>
-    </div>
-
-    <!-- AUTHOR'S NOTE -->
-    <div class="authors-note">
-      <p class="authors-note-label">Author's Note</p>
-      <p>Hi everyone — welcome, and thank you for being here. I'm Colt Damian from AO3, pleasure to meet you here. This chapter contains age-restricted content gated behind a passcode. The passcode is <strong>03042302</strong>. Please read responsibly. ♥</p>
-    </div>
-
-    <!-- STORY TEXT (free section) -->
-    <div class="story-body">
-      <p>I'm Colt Damian from AO3, pleasure to meet you here.</p>
-      <p>The room was exactly as she'd left it — windows cracked, the smell of paper and something older underneath. She stood in the doorway a moment longer than necessary, the way one does when they're not sure if entering means something.</p>
-    </div>
-
-    <!-- GATE -->
-    <div class="gate-wrap">
-      <div class="scene-break">✦ &nbsp; restricted content below &nbsp; ✦</div>
-
-      <div class="gate-box" id="gate-box">
-        <p class="gate-lock">Locked Section</p>
-        <p class="gate-title">Age-restricted content</p>
-        <p class="gate-sub">Enter the passcode from the author's note to continue.<br>This section is intended for adult readers only.</p>
-        <div class="gate-row">
-          <input class="gate-input" id="gate-input" type="password" placeholder="passcode" autocomplete="off" />
-          <button class="gate-btn" id="gate-btn" type="button">Enter</button>
-        </div>
-        <p class="gate-error" id="gate-error"></p>
-        <p class="gate-hint">Hint: check the author's note above · case-sensitive</p>
-      </div>
-
-      <div class="gate-content" id="gate-content">
-        <span class="gate-granted">✓ Access granted</span>
-        <div class="story-body">
-          <p>Hello everyone my name is Lulu, this is the page I'm testing today.</p>
-          <p>Did it really work?</p>
-          <!-- ✏️ ADD YOUR LOCKED STORY CONTENT HERE -->
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <div class="sidebar-card">
-      <p class="sidebar-card-title">Story Stats</p>
-      <div class="stat-grid">
-        <div class="stat-item">
-          <span class="stat-label">Rating</span>
-          <span class="stat-value"><span class="rating-badge">M</span></span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Kudos</span>
-          <span class="stat-value" id="kudos-val">—</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Hits</span>
-          <span class="stat-value" id="hits-val">—</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Bookmarks</span>
-          <span class="stat-value">—</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-card">
-      <p class="sidebar-card-title">Actions</p>
-      <button class="bookmark-btn primary" onclick="handleKudos(this)">♥ &nbsp;Give Kudos</button>
-      <button class="bookmark-btn">🔖 &nbsp;Bookmark</button>
-      <button class="bookmark-btn">💬 &nbsp;Leave a Comment</button>
-    </div>
-
-    <div class="sidebar-card">
-      <p class="sidebar-card-title">Recent Comments</p>
-      <div class="comment-stub">
-        <div class="comment-avatar">A</div>
-        <div>
-          <div class="comment-user">anonymous</div>
-          <div class="comment-text">This is stunning, I can't wait for more chapters...</div>
-        </div>
-      </div>
-      <div class="comment-stub">
-        <div class="comment-avatar">R</div>
-        <div>
-          <div class="comment-user">reader_ghost</div>
-          <div class="comment-text">The imagery in the opening is incredible.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-card">
-      <p class="sidebar-card-title">Also By This Author</p>
-      <div style="display:flex;flex-direction:column;gap:0.6rem;">
-        <a href="#" style="font-family:'EB Garamond',serif;font-style:italic;color:var(--accent);font-size:0.95rem;text-decoration:none;">Another Quiet Ending</a>
-        <a href="#" style="font-family:'EB Garamond',serif;font-style:italic;color:var(--accent);font-size:0.95rem;text-decoration:none;">Letters to No One</a>
-        <a href="#" style="font-family:'EB Garamond',serif;font-style:italic;color:var(--accent);font-size:0.95rem;text-decoration:none;">The Distance Between</a>
-      </div>
-    </div>
-
-  </aside>
 </div>
 
-<footer class="site-footer">
-  <p>A personal archive · Built with care · <a href="#">Colt Damian on AO3</a></p>
-</footer>
+<p class="footer">
+  <a href="#">← back</a> &nbsp;·&nbsp; posted with love
+</p>
 
 <script>
 (function() {
-  var PASSCODE = "03042302";
-
+  var PASSCODE = "0304"; /* ← PASSCODE */
   function check() {
     var input = document.getElementById("gate-input");
     var error = document.getElementById("gate-error");
@@ -680,26 +276,15 @@
       document.getElementById("gate-box").style.display = "none";
       document.getElementById("gate-content").classList.add("open");
     } else {
-      error.textContent = "Incorrect passcode. Please try again.";
+      error.textContent = "Wrong passcode — try again.";
       input.value = "";
       setTimeout(function() { error.textContent = ""; }, 2500);
     }
   }
-
   document.getElementById("gate-btn").addEventListener("click", check);
   document.getElementById("gate-input").addEventListener("keydown", function(e) {
     if (e.key === "Enter") check();
   });
-
-  // Fake kudos interaction
-  var kudosGiven = false;
-  window.handleKudos = function(btn) {
-    if (kudosGiven) return;
-    kudosGiven = true;
-    btn.textContent = "♥  Thanks!";
-    btn.style.background = "#c4667a";
-    btn.disabled = true;
-  };
 })();
 </script>
 </body>
