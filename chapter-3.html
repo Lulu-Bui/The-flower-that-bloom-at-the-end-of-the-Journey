@@ -7,6 +7,74 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
+<style>
+.locked-content {
+  display: none;
+}
+.locked-content.open {
+  display: block;
+}
+.gate-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+.gate-input {
+  padding: 9px 14px;
+  font-size: .85rem;
+  font-family: 'Nunito', sans-serif;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  letter-spacing: .1em;
+  text-align: center;
+  width: 180px;
+  outline: none;
+}
+.gate-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.gate-btn {
+  padding: 9px 20px;
+  font-size: .82rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.gate-error {
+  color: var(--error);
+  font-size: .76rem;
+  margin-top: .65rem;
+  min-height: 1.1em;
+}
+.gate-hint {
+  font-size: .72rem;
+  color: var(--faint);
+  margin-top: .45rem;
+}
+.unlocked-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--success);
+  background: var(--success-bg);
+  border-radius: 20px;
+  padding: 3px 10px;
+  margin-bottom: 1.25rem;
+}
+</style>
 </head>
 <body class="reader-body">
 
@@ -14,18 +82,81 @@
 
 <div class="card">
   <p class="story-label">Chapter 3</p>
-  <h1 class="story-title">Longlivity</h1>
-  <p class="story-meta">SMUT</p>
+  <h1 class="story-title">Longevity</h1>
+  <p class="story-meta">SMUT · 🔒 Locked Chapter</p>
   
+  <!-- FREE PREVIEW (visible to everyone) -->
   <div class="story-text">
-    <p>Testing</p>
+    <p><em>Chapter preview: The air was thick with anticipation as their eyes met across the dimly lit room. Neither spoke, but words weren't needed anymore.</em></p>
   </div>
   
   <div class="break">✦ ✦ ✦</div>
   
-  <p><a href="/" style="color: var(--accent); text-decoration: none;">← Back to chapters</a></p>
+  <!-- PASSCODE GATE -->
+  <div id="gateBox" class="gate-box">
+    <span class="gate-icon">🔒</span>
+    <div class="gate-title">Locked Chapter</div>
+    <div class="gate-sub">Enter the passcode to read the full chapter.</div>
+    <div>
+      <input type="password" id="passcode" class="gate-input" placeholder="passcode" autocomplete="off" />
+      <button onclick="unlockChapter()" class="gate-btn">Unlock</button>
+    </div>
+    <div id="errorMsg" class="gate-error"></div>
+    <div class="gate-hint">💡 Hint: Check the author's note for the passcode</div>
+  </div>
+  
+  <!-- LOCKED CONTENT (hidden until unlocked) -->
+  <div id="lockedContent" class="locked-content">
+    <div class="unlocked-badge">✓ UNLOCKED</div>
+    <div class="story-text">
+      <p><strong>Full chapter content goes here...</strong></p>
+      <p>This is the age-restricted content that only appears after entering the correct passcode.</p>
+      <p>Write your locked chapter content here. It will remain hidden until the reader enters the passcode.</p>
+      <p>You can add as many paragraphs, scenes, or chapters as you want inside this section.</p>
+    </div>
+  </div>
+  
+  <div class="break">✦ ✦ ✦</div>
+  
+  <p><a href="index.html" style="color: var(--accent); text-decoration: none;">← Back to chapters</a></p>
 </div>
 
 <p class="page-footer">posted with love</p>
+
+<script>
+// Set your passcode here - change this to whatever you want!
+const CORRECT_PASSCODE = "0304";
+
+function unlockChapter() {
+  const enteredCode = document.getElementById("passcode").value;
+  const errorMsg = document.getElementById("errorMsg");
+  const gateBox = document.getElementById("gateBox");
+  const lockedContent = document.getElementById("lockedContent");
+  
+  if (enteredCode === CORRECT_PASSCODE) {
+    // Correct passcode - show the content
+    gateBox.style.display = "none";
+    lockedContent.classList.add("open");
+    // Save to session storage so it stays unlocked while browsing
+    sessionStorage.setItem("chapter3_unlocked", "true");
+  } else {
+    errorMsg.textContent = "Incorrect passcode. Please try again.";
+    document.getElementById("passcode").value = "";
+  }
+}
+
+// Check if already unlocked in this session
+if (sessionStorage.getItem("chapter3_unlocked") === "true") {
+  document.getElementById("gateBox").style.display = "none";
+  document.getElementById("lockedContent").classList.add("open");
+}
+
+// Enter key support
+document.getElementById("passcode").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    unlockChapter();
+  }
+});
+</script>
 </body>
 </html>
