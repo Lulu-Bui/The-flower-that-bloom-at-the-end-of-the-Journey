@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter 1 — Something Untitled</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f2ed; --surface: #faf8f5; --ink: #1e1b18;
+    --muted: #7a7068; --faint: #b0a89e; --accent: #c06b3a; --border: #e2dcd4;
+  }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Nunito', sans-serif; font-weight: 300;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 3.5rem 1.25rem 6rem;
+  }
+  .byline {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 3rem; text-align: center;
+  }
+  .byline a { color: var(--accent); text-decoration: none; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 3rem 2.75rem; width: 100%; max-width: 660px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.045);
+  }
+  .story-label {
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-family: 'Lora', serif; font-size: 1.85rem; font-weight: 500;
+    line-height: 1.25; color: var(--ink); margin-bottom: 0.4rem;
+  }
+  .story-meta {
+    font-size: 0.78rem; color: var(--muted); margin-bottom: 2.25rem;
+    padding-bottom: 1.75rem; border-bottom: 1px solid var(--border);
+  }
+  .story-text {
+    font-family: 'Lora', serif; font-size: 1.05rem; line-height: 1.95; color: var(--ink);
+  }
+  .story-text p { margin-bottom: 1.3em; }
+  .story-text p:last-child { margin-bottom: 0; }
+  .note {
+    background: #fdf6ee; border-left: 2px solid var(--accent);
+    border-radius: 0 6px 6px 0; padding: 0.9rem 1.1rem; margin: 2rem 0;
+    font-size: 0.85rem; color: var(--muted); line-height: 1.7;
+  }
+  .note strong { color: var(--ink); font-weight: 500; }
+  .note-label {
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.35rem;
+  }
+  .footer {
+    margin-top: 2.5rem; font-size: 0.72rem; color: var(--faint);
+    text-align: center; letter-spacing: 0.05em; display: flex;
+    gap: 1rem; justify-content: center;
+  }
+  .footer a { color: var(--muted); text-decoration: none; }
+  .footer a:hover { color: var(--accent); }
+  @media (max-width: 500px) { .card { padding: 2rem 1.5rem; } h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<p class="byline">A side story by <a href="#">Colt Damian</a> &nbsp;·&nbsp; for the readers</p>
+
+<div class="card">
+
+  <p class="story-label">Chapter 1</p>
+  <h1>Arrival</h1>
+  <!-- ↓ update word count and date as needed -->
+  <p class="story-meta">~800 words &nbsp;·&nbsp; passcode needed &nbsp;·&nbsp; May 2025</p>
+
+  <!-- AUTHOR'S NOTE (optional — delete the whole .note block if you don't need one) -->
+  <div class="note">
+    <p class="note-label">Author's note</p>
+    <p>Hi everyone! This is the texing beta of my website. Hope you enjoy the little side story. ♥</p>
+  </div>
+
+  <!-- YOUR STORY TEXT GOES HERE -->
+  <div class="story-text">
+    <p>I'm Colt Damian from AO3, pleasure to meet you here.</p>
+    <p>The room was exactly as she'd left it — windows cracked, the smell of paper and something older underneath. She stood in the doorway a moment longer than necessary, the way one does when they're not sure if entering means something.</p>
+    <p>Nothing had moved. The chair still faced away from the desk. The lamp was still tilted at its odd angle, casting half the room into a warm, forgiving shadow. She exhaled and stepped inside.</p>
+    <p>This chapter has no locked section — just write your full story text here and delete the gate from the template. Keep going as many paragraphs as you need.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER NAV: update hrefs to match your actual file names -->
+<p class="footer">
+  <a href="index.html">← all chapters</a>
+  &nbsp;·&nbsp;
+  <a href="chapter-2.html">next →</a>
+</p>
+
+</body>
+</html>
