@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Something Untitled — Colt Damian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="reader-body">
+
+<p class="byline">A side story by <a href="#">Colt Damian</a> &nbsp;·&nbsp; for the readers</p>
+
+<div class="card">
+  <p class="story-label">Side Story</p>
+  <h1 class="story-title">Something Untitled</h1>
+  <p class="story-meta">by Colt Damian &nbsp;·&nbsp; Mature content &nbsp;·&nbsp; In progress</p>
+
+  <div class="story-text" style="margin-bottom:2rem;">
+    <p>Welcome. This is a side story set in the same world as the main fic. New chapters are posted regularly. Each locked section has its own passcode shared in that chapter's author note.</p>
+  </div>
+
+  <p class="chapters-label">Chapters</p>
+  <div class="chapter-list" id="chapter-list">
+    <p style="font-size:.85rem;color:var(--faint);font-style:italic;padding:1rem 0;">Loading chapters…</p>
+  </div>
+</div>
+
+<p class="page-footer">posted with love</p>
+
+<script>
+async function loadChapters() {
+  const list = document.getElementById("chapter-list");
+  try {
+    const res = await fetch("/api/chapters");
+    const chapters = await res.json();
+    if (!chapters.length) {
+      list.innerHTML = '<p style="font-size:.85rem;color:var(--faint);font-style:italic;padding:1rem 0;">No chapters posted yet — check back soon.</p>';
+      return;
+    }
+    list.innerHTML = chapters.map(ch => `
+      <a class="chapter-link" href="/chapter/${ch.id}">
+        <div class="ch-title">
+          <span class="ch-name">Chapter ${ch.number}${ch.title ? ' — ' + ch.title : ''}</span>
+          ${ch.subtitle ? `<span class="ch-sub">${ch.subtitle}</span>` : ''}
+        </div>
+        <span class="ch-badge ${ch.hasGate ? 'locked' : 'free'}">${ch.hasGate ? '🔒 locked' : 'free'}</span>
+      </a>
+    `).join("");
+  } catch(e) {
+    list.innerHTML = '<p style="color:var(--error);font-size:.85rem;">Could not load chapters.</p>';
+  }
+}
+loadChapters();
+</script>
+</body>
+</html>

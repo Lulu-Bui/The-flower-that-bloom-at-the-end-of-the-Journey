@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reading — Colt Damian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="reader-body">
+
+<p class="byline">A side story by <a href="/">Colt Damian</a> &nbsp;·&nbsp; for the readers</p>
+
+<div class="card" id="card">
+  <p style="font-size:.85rem;color:var(--faint);font-style:italic;">Loading…</p>
+</div>
+
+<p class="page-footer" id="nav-footer" style="display:none;">
+  <a href="/">← all chapters</a>
+</p>
+
+<script>
+const chapterId = location.pathname.split("/").pop();
+
+async function loadChapter() {
+  const card = document.getElementById("card");
+  try {
+    const res = await fetch(`/api/chapters/${chapterId}`);
+    if (!res.ok) { card.innerHTML = '<p style="color:var(--error);">Chapter not found.</p>'; return; }
+    const ch = await res.json();
+    document.title = `Chapter ${ch.number}${ch.title ? ' — ' + ch.title : ''}`;
+
+    let html = `
+      <p class="story-label">Chapter ${ch.number}</p>
+      <h1 class="story-title">${ch.title || 'Untitled'}</h1>
+      <p class="story-meta">
+        ${ch.wordCount ? ch.wordCount + ' &nbsp;·&nbsp; ' : ''}
+        ${ch.hasGate ? 'Mature content &nbsp;·&nbsp; ' : ''}
+        ${ch.date || ''}
+      </p>
+    `;
+
+    if (ch.freeContent) html += `<div class="story-text">${ch.freeContent}</div>`;
+
+    if (ch.authorNote) {
+      html += `<div class="note"><p class="note-label">Author's note</p><div>${ch.authorNote}</div></div>`;
+    }
+
+    if (ch.hasGate) {
+      html += `
+        <div class="break">restricted below</div>
+        <div class="gate-box" id="gate-box">
+          <span class="gate-icon">🔒</span>
+          <p class="gate-title">Age-restricted content</p>
+          <p class="gate-sub">Enter the passcode from the author's note above.</p>
+          <div class="gate-row">
+            <input class="gate-input" id="gate-input" type="password" placeholder="passcode" autocomplete="off"/>
+            <button class="gate-btn" id="gate-btn">Unlock</button>
+          </div>
+          <p class="gate-error" id="gate-error"></p>
+          ${ch.passcodeHint ? `<p class="gate-hint">${ch.passcodeHint}</p>` : ''}
+        </div>
+        <div class="gate-content" id="gate-content">
+          <span class="unlocked-badge">✓ unlocked</span>
+          <div class="story-text" id="locked-text"></div>
+        </div>
+      `;
+    }
+
+    card.innerHTML = html;
+
+    if (ch.hasGate) {
+      document.getElementById("gate-btn").addEventListener("click", tryUnlock);
+      document.getElementById("gate-input").addEventListener("keydown", e => {
+        if (e.key === "Enter") tryUnlock();
+      });
+    }
+
+    document.getElementById("nav-footer").style.display = "flex";
+  } catch(e) {
+    card.innerHTML = '<p style="color:var(--error);">Failed to load chapter.</p>';
+  }
+}
+
+async function tryUnlock() {
+  const input = document.getElementById("gate-input");
+  const error = document.getElementById("gate-error");
+  const passcode = input.value.trim();
+  if (!passcode) return;
+
+  const res = await fetch(`/api/chapters/${chapterId}/unlock`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ passcode })
+  });
+  const data = await res.json();
+
+  if (data.success) {
+    document.getElementById("gate-box").style.display = "none";
+    document.getElementById("locked-text").innerHTML = data.content || "";
+    document.getElementById("gate-content").classList.add("open");
+  } else {
+    error.textContent = "Wrong passcode — try again.";
+    input.value = "";
+    setTimeout(() => { error.textContent = ""; }, 2500);
+  }
+}
+
+loadChapter();
+</script>
+</body>
+</html>
