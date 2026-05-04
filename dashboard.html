@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard — Colt Damian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<style>
+.dashboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.admin-title {
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+}
+.logout-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+}
+.logout-btn:hover {
+  background: var(--border);
+}
+.chapter-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  color: var(--accent);
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+.form-group textarea {
+  min-height: 150px;
+  font-family: 'Lora', serif;
+}
+.save-btn {
+  background: var(--accent);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+}
+.instructions {
+  background: var(--success-bg);
+  border-left: 3px solid var(--success);
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+.instructions code {
+  background: rgba(0,0,0,0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+</style>
+</head>
+<body class="reader-body">
+
+<div class="dashboard-container">
+  <div class="admin-header">
+    <span class="admin-title">📝 Story Admin Dashboard</span>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+
+  <div class="chapter-form">
+    <h3 style="font-family: 'Lora', serif; margin-bottom: 1rem;">Add New Chapter</h3>
+    
+    <div class="form-group">
+      <label>Chapter Number</label>
+      <input type="number" id="chapterNum" placeholder="e.g., 3" />
+    </div>
+    
+    <div class="form-group">
+      <label>Chapter Title</label>
+      <input type="text" id="chapterTitle" placeholder="Chapter Title" />
+    </div>
+    
+    <div class="form-group">
+      <label>Subtitle (optional)</label>
+      <input type="text" id="chapterSub" placeholder="Subtitle description" />
+    </div>
+    
+    <div class="form-group">
+      <label>Content Preview / Description</label>
+      <textarea id="chapterDesc" placeholder="Write a brief description or preview of the chapter..."></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label>Status</label>
+      <select id="chapterStatus" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:8px;">
+        <option value="free">Free (no passcode)</option>
+        <option value="locked">Locked (requires passcode)</option>
+      </select>
+    </div>
+    
+    <button onclick="generateChapterFile()" class="save-btn">Generate Chapter HTML</button>
+    
+    <div class="instructions" id="output" style="display:none;">
+      <strong>✅ Chapter file ready!</strong><br /><br />
+      <div id="instructionsContent"></div>
+    </div>
+  </div>
+  
+  <div class="instructions">
+    <strong>📖 Quick Guide:</strong><br /><br />
+    1. Fill in the chapter details above<br />
+    2. Click "Generate Chapter HTML"<br />
+    3. Copy the generated code<br />
+    4. Create a new file: <code>chapter-X.html</code> in your <code>public</code> folder<br />
+    5. Add a link to your <code>index.html</code> chapter list<br />
+    6. Run <code>firebase deploy --only hosting</code>
+  </div>
+</div>
+
+<script>
+// Check if logged in
+if (!sessionStorage.getItem("adminLoggedIn")) {
+  window.location.href = "login.html";
+}
+
+function logout() {
+  sessionStorage.removeItem("adminLoggedIn");
+  window.location.href = "login.html";
+}
+
+function generateChapterFile() {
+  const num = document.getElementById("chapterNum").value;
+  const title = document.getElementById("chapterTitle").value;
+  const subtitle = document.getElementById("chapterSub").value;
+  const desc = document.getElementById("chapterDesc").value;
+  const status = document.getElementById("chapterStatus").value;
+  
+  if (!num || !title) {
+    alert("Please fill in Chapter Number and Title");
+    return;
+  }
+  
+  const badge = status === 'free' ? 'free' : 'locked';
+  const badgeText = status === 'free' ? 'free' : '🔒 locked';
+  
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter ${num} — Something Untitled</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="reader-body">
+
+<p class="byline">A side story by Colt Damian</p>
+
+<div class="card">
+  <p class="story-label">Chapter ${num}</p>
+  <h1 class="story-title">${title}</h1>
+  ${subtitle ? `<p class="story-meta">${subtitle}</p>` : ''}
+  
+  <div class="story-text">
+    <p>${desc || "Your chapter content goes here..."}</p>
+  </div>
+  
+  <div class="break">✦ ✦ ✦</div>
+  
+  <p><a href="/" style="color: var(--accent); text-decoration: none;">← Back to chapters</a></p>
+</div>
+
+<p class="page-footer">posted with love</p>
+</body>
+</html>`;
+  
+  document.getElementById("instructionsContent").innerHTML = `
+    <strong>Create a new file called:</strong> <code>chapter-${num}.html</code><br /><br />
+    <strong>Copy this code into it:</strong><br /><br />
+    <textarea readonly style="width:100%; height:200px; font-family:monospace; font-size:11px; padding:8px; background:#f5f2ed; border:1px solid var(--border); border-radius:8px;" onclick="this.select()">${html.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+    <br /><br />
+    <strong>Then add this link to your index.html chapter list:</strong><br />
+    <code style="display:block; background:#f5f2ed; padding:8px; border-radius:8px; margin-top:8px;">
+    &lt;a class="chapter-link" href="chapter-${num}.html"&gt;<br />
+    &nbsp;&nbsp;&lt;div class="ch-title"&gt;<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&lt;span class="ch-name"&gt;Chapter ${num} — ${title}&lt;/span&gt;<br />
+    ${subtitle ? `&nbsp;&nbsp;&nbsp;&nbsp;&lt;span class="ch-sub"&gt;${subtitle}&lt;/span&gt;<br />` : ''}
+    &nbsp;&nbsp;&lt;/div&gt;<br />
+    &nbsp;&nbsp;&lt;span class="ch-badge ${badge}"&gt;${badgeText}&lt;/span&gt;<br />
+    &lt;/a&gt;
+    </code>
+  `;
+  
+  document.getElementById("output").style.display = "block";
+}
+</script>
+</body>
+</html>
