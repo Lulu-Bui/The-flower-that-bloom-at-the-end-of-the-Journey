@@ -23,36 +23,33 @@
 
   <p class="chapters-label">Chapters</p>
   <div class="chapter-list" id="chapter-list">
-    <p style="font-size:.85rem;color:var(--faint);font-style:italic;padding:1rem 0;">Loading chapters…</p>
+    <!-- STATIC CHAPTER LINKS - Update these as you add more chapters -->
+    <a class="chapter-link" href="chapter-1.html">
+      <div class="ch-title">
+        <span class="ch-name">Chapter 1 — The Beginning</span>
+        <span class="ch-sub">in which our journey starts</span>
+      </div>
+      <span class="ch-badge free">free</span>
+    </a>
+    
+    <a class="chapter-link" href="chapter-2.html">
+      <div class="ch-title">
+        <span class="ch-name">Chapter 2 — The Journey</span>
+        <span class="ch-sub">the road ahead</span>
+      </div>
+      <span class="ch-badge locked">🔒 locked</span>
+    </a>
+    
+    <!-- Add more chapters here as you create them -->
   </div>
 </div>
 
 <p class="page-footer">posted with love</p>
 
 <script>
-async function loadChapters() {
-  const list = document.getElementById("chapter-list");
-  try {
-    const res = await fetch("/api/chapters");
-    const chapters = await res.json();
-    if (!chapters.length) {
-      list.innerHTML = '<p style="font-size:.85rem;color:var(--faint);font-style:italic;padding:1rem 0;">No chapters posted yet — check back soon.</p>';
-      return;
-    }
-    list.innerHTML = chapters.map(ch => `
-      <a class="chapter-link" href="/chapter/${ch.id}">
-        <div class="ch-title">
-          <span class="ch-name">Chapter ${ch.number}${ch.title ? ' — ' + ch.title : ''}</span>
-          ${ch.subtitle ? `<span class="ch-sub">${ch.subtitle}</span>` : ''}
-        </div>
-        <span class="ch-badge ${ch.hasGate ? 'locked' : 'free'}">${ch.hasGate ? '🔒 locked' : 'free'}</span>
-      </a>
-    `).join("");
-  } catch(e) {
-    list.innerHTML = '<p style="color:var(--error);font-size:.85rem;">Could not load chapters.</p>';
-  }
-}
-loadChapters();
+// Optional: If you have chapter files, this will still work
+// The static links above will always show
+console.log("Chapter links are now static!");
 </script>
 </body>
 </html>
