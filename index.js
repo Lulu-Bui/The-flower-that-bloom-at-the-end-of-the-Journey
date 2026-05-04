@@ -3,8 +3,9 @@ const admin = require("firebase-admin");
 const express = require("express");
 const session = require("express-session");
 
-admin.initializeApp();
-const db = admin.firestore();
+admin.initializeApp({
+  projectId: "story-writing-lulu-bui"
+});const db = admin.firestore();
 
 const app = express();
 
